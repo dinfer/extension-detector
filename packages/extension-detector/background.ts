@@ -1,7 +1,5 @@
 import { Api, CHANNEL_ID } from "./types";
 
-console.log("Hello1", new Date());
-
 chrome.runtime.onConnect.addListener((port) => {
   console.log("> port", port);
   if (port.name !== CHANNEL_ID) {
@@ -36,8 +34,4 @@ chrome.runtime.onConnect.addListener((port) => {
         });
     }
   });
-});
-
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
-  console.log(">", message, sender, sendResponse);
 });

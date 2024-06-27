@@ -1,35 +1,9 @@
 import React, { FC, useEffect, useState } from "react";
 import { Api, CHANNEL_ID } from "../types";
 import { Invoker } from "./Invoker";
+import { ExtensionList } from "./ExtensionList";
 
 const port = chrome.runtime.connect({ name: CHANNEL_ID });
-
-const ExtensionList: FC<{ invoker: Invoker<Api> }> = ({ invoker }) => {
-  const [list, setList] = useState<chrome.management.ExtensionInfo[]>();
-  useEffect(() => {
-    invoker.invoke("background", "listExtensions").then((list) => {
-      setList((list as any) || []);
-    });
-    fetch("chrome-extension://hefbggikcnbfmhonaekmkneehfajobhl/16/0").then(
-      (r) => console.log("> icon", r),
-      (e) => console.error("> icon", e)
-    );
-  }, []);
-  return (
-    <div>
-      {list ? (
-        list.map((v) => (
-          <div key={v.id}>
-            <div className="text-slate-800">名称: {v.name}</div>
-            <div className="text-slate-400">id: {v.id}</div>
-          </div>
-        ))
-      ) : (
-        <div>loading</div>
-      )}
-    </div>
-  );
-};
 
 export default function ContentApp() {
   const [open, setOpen] = React.useState(false);
@@ -55,7 +29,7 @@ export default function ContentApp() {
   });
 
   return (
-    <div className="m-4 p-4 w-80 rounded bg-slate-100">
+    <div className="m-4 p-4 w-96 rounded bg-slate-100">
       <div className="flex justify-between items-center">
         <div className="font-bold">extension installed</div>
         <button
