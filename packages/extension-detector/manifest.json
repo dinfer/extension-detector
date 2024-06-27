@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "version": "1.0",
+  "name": "extension-detector",
+  "description": "exetnsion detector",
+  "background": {
+    "service_worker": "./background.ts"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./content/content.tsx"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "public/icon/icon_16.png",
+    "48": "public/icon/icon_48.png"
+  },
+  "permissions": ["management"]
+}
